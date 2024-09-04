@@ -1,0 +1,181 @@
+{
+	"visualizations": {
+		"viz_imITctCZ": {
+			"type": "splunk.line",
+			"title": "TPS for Ajax calls",
+			"dataSources": {
+				"primary": "ds_cNP1oj53"
+			},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"options": {
+				"y": "> primary | frameBySeriesNames('509', 'pass')",
+				"dataValuesDisplay": "minmax",
+				"legendDisplay": "bottom"
+			}
+		},
+		"viz_ak7Ggk8p": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_8sjmZ2kt"
+			},
+			"title": "No of Ajax calls Blocking"
+		},
+		"viz_OK5jL7Jc": {
+			"type": "splunk.singlevalue",
+			"options": {
+				"majorValue": "> primary | seriesByName('count')",
+				"trendValue": "> primary | delta(-2)"
+			},
+			"dataSources": {
+				"primary": "ds_bHWgJpf1"
+			},
+			"title": "No of Ajax calls Non Blocking"
+		},
+		"viz_5zmnENB7": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_xMcstlJS"
+			},
+			"title": "No of Protected Calls - Bot Mode Enabled",
+			"options": {
+				"majorValue": "> primary | seriesByName('count')",
+				"sparklineValues": "> primary | seriesByName('count')"
+			}
+		},
+		"viz_BeKHyUJk": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_D1I6r2di"
+			},
+			"title": "Challenge GET calls",
+			"showProgressBar": false,
+			"showLastUpdated": false
+		},
+		"viz_5FmvuLsV": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_0jpg5sSG"
+			},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Bctm < 5 seconds",
+			"description": "For Challenges Bot execution time"
+		},
+		"viz_Sunsj9mv": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_0jpg5sSG"
+			},
+			"title": "Bctm > 5 seconds",
+			"options": {
+				"majorValue": "> primary | seriesByName('bctm_f')",
+				"trendValue": "> primary | delta(-2)"
+			},
+			"description": "For Challenges Bot execution time"
+		},
+		"viz_foS3SZH9": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_eB5bjxfe"
+			},
+			"title": "No of Ajax calls"
+		},
+		"viz_ndYfgk8d": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_l8vuF8sU"
+			},
+			"title": "No of Protected Calls - Bot Mode Disabled"
+		},
+		"viz_kjDAa43d": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_fIQv6UgV"
+			},
+			"title": "PAT Success Calls"
+		},
+		"viz_IhUtYFGw": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_g3M4uTat"
+			},
+			"title": "PAT Failure Calls"
+		},
+		"viz_7JWH4NdM": {
+			"type": "splunk.singlevalue",
+			"title": "Challenge POST Calls",
+			"dataSources": {
+				"primary": "ds_7HT361Db"
+			}
+		},
+		"viz_kgHHGXdt": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_TTv3nNha"
+			},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Reasons for Blocked Protected URI"
+		},
+		"viz_FVnFShHp": {
+			"type": "splunk.line",
+			"dataSources": {
+				"primary": "ds_MnEkdmvd"
+			},
+			"title": "Bot Score for Blocked Protected URI",
+			"options": {
+				"y": "> primary | frameBySeriesNames('10', 'noShieldCookie')",
+				"dataValuesDisplay": "minmax",
+				"legendDisplay": "bottom"
+			}
+		},
+		"viz_HcoHCW1R": {
+			"type": "splunk.line",
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Value Median/P99 for BCTM",
+			"dataSources": {
+				"primary": "ds_aXR5iJU3"
+			},
+			"options": {
+				"dataValuesDisplay": "minmax",
+				"y": "> primary | frameBySeriesNames('median', 'P99')",
+				"nullValueDisplay": "connect"
+			}
+		},
+		"viz_ipg8YD7r": {
+			"type": "splunk.area",
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "BotMode",
+			"dataSources": {
+				"primary": "ds_IL2GWNCy"
+			},
+			"options": {
+				"y": "> primary | frameBySeriesNames('lenient', 'standard', 'strict')",
+				"nullValueDisplay": "connect",
+				"legendDisplay": "bottom",
+				"dataValuesDisplay": "minmax"
+			}
+		},
+		"viz_2eatCRtL": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_KSvHuycD"
+			},
+			"title": "Top 10 Countries with Blocked Protected URIs",
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"options": {
+				"labelDisplay": "valuesAndPercentage",
+				"showDonutHole": true
+			}
+		},
+		"viz_h2XxATCH": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_DyctLhgz"
+			},
+			"title": "Count of POST Challenges Failed"
+		},
