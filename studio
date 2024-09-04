@@ -1,0 +1,754 @@
+{
+	"visualizations": {
+		"viz_imITctCZ": {
+			"type": "splunk.line",
+			"title": "TPS for Ajax calls",
+			"dataSources": {
+				"primary": "ds_cNP1oj53"
+			},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"options": {
+				"y": "> primary | frameBySeriesNames('509','pass')",
+				"dataValuesDisplay": "minmax",
+				"y2": "> primary | frameBySeriesNames('')",
+				"legendDisplay": "bottom"
+			}
+		},
+		"viz_ak7Ggk8p": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_8sjmZ2kt"
+			},
+			"title": "No of Ajax calls Blocking"
+		},
+		"viz_OK5jL7Jc": {
+			"type": "splunk.singlevalue",
+			"options": {
+				"majorValue": "> sparklineValues | lastPoint()",
+				"trendValue": "> sparklineValues | delta(-2)",
+				"sparklineValues": "> primary | seriesByName('count')"
+			},
+			"dataSources": {
+				"primary": "ds_bHWgJpf1"
+			},
+			"title": "No of Ajax calls Non Blocking"
+		},
+		"viz_5zmnENB7": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_xMcstlJS"
+			},
+			"title": "No of Protected calls bot mode enabled",
+			"options": {
+				"majorValue": "> sparklineValues | lastPoint()",
+				"trendValue": "> sparklineValues | delta(-2)",
+				"sparklineValues": "> primary | seriesByName('count')"
+			}
+		},
+		"viz_BeKHyUJk": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_D1I6r2di"
+			},
+			"title": "Challenge GET calls",
+			"showProgressBar": false,
+			"showLastUpdated": false
+		},
+		"viz_5FmvuLsV": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_0jpg5sSG"
+			},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Bctm less than 5 seconds",
+			"description": "For Challenges Bot execution time"
+		},
+		"viz_Sunsj9mv": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_0jpg5sSG"
+			},
+			"title": "Bctm greater than 5 seconds",
+			"options": {
+				"majorValue": "> sparklineValues | lastPoint()",
+				"trendValue": "> sparklineValues | delta(-2)",
+				"sparklineValues": "> primary | seriesByName('bctm_f')"
+			},
+			"description": "For Challenges Bot execution time"
+		},
+		"viz_foS3SZH9": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_eB5bjxfe"
+			},
+			"title": "No of Ajax calls",
+			"description": ""
+		},
+		"viz_ndYfgk8d": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_l8vuF8sU"
+			},
+			"title": "No of Protected calls bot mode disabled"
+		},
+		"viz_kjDAa43d": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_fIQv6UgV"
+			},
+			"title": "PAT success calls",
+			"description": ""
+		},
+		"viz_IhUtYFGw": {
+			"type": "splunk.singlevalue",
+			"dataSources": {
+				"primary": "ds_g3M4uTat"
+			},
+			"title": "PAT failure calls",
+			"description": ""
+		},
+		"viz_7JWH4NdM": {
+			"type": "splunk.singlevalue",
+			"title": "Challenge POST calls",
+			"dataSources": {
+				"primary": "ds_7HT361Db"
+			}
+		},
+		"viz_kgHHGXdt": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_TTv3nNha"
+			},
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Reasons for Blocked Protected URI",
+			"options": {
+				"tableFormat": {
+					"rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableRowBackgroundColorsByTheme)"
+				}
+			}
+		},
+		"viz_FVnFShHp": {
+			"type": "splunk.line",
+			"dataSources": {
+				"primary": "ds_MnEkdmvd"
+			},
+			"title": "Bot score for Blocked protected uri",
+			"options": {
+				"y": "> primary | frameBySeriesNames('10','noShieldCookie')",
+				"y2": "> primary | frameBySeriesNames('')",
+				"dataValuesDisplay": "minmax",
+				"legendDisplay": "bottom"
+			}
+		},
+		"viz_HcoHCW1R": {
+			"type": "splunk.line",
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "Value Median/P99 for BCTM",
+			"dataSources": {
+				"primary": "ds_aXR5iJU3"
+			},
+			"options": {
+				"dataValuesDisplay": "minmax",
+				"y": "> primary | frameBySeriesNames('median','P99')",
+				"y2": "> primary | frameBySeriesNames('')",
+				"legendDisplay": "bottom",
+				"nullValueDisplay": "connect"
+			}
+		},
+		"viz_ipg8YD7r": {
+			"type": "splunk.area",
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"title": "BotMode",
+			"dataSources": {
+				"primary": "ds_IL2GWNCy"
+			},
+			"options": {
+				"y": "> primary | frameBySeriesNames('lenient','standard','strict','_span')",
+				"nullValueDisplay": "connect",
+				"legendDisplay": "bottom",
+				"dataValuesDisplay": "minmax"
+			}
+		},
+		"viz_xJT7S8ps": {
+			"type": "splunk.singlevalue",
+			"options": {
+				"majorValue": "> sparklineValues | lastPoint()",
+				"trendValue": "> sparklineValues | delta(-2)",
+				"sparklineValues": "> primary | seriesByName('status')"
+			},
+			"dataSources": {
+				"primary": "ds_s0BcYJBa"
+			},
+			"title": "Challenges Post calls-4xx"
+		},
+		"viz_2eatCRtL": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_KSvHuycD"
+			},
+			"title": "Top 10 countries with Blocked Protected URIs",
+			"showProgressBar": false,
+			"showLastUpdated": false,
+			"options": {
+				"labelDisplay": "valuesAndPercentage",
+				"showDonutHole": true
+			}
+		},
+		"viz_h2XxATCH": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_DyctLhgz"
+			},
+			"title": "Count of POST challenges Failed",
+			"description": "Need to add reasons ( don't know fields)"
+		},
+		"viz_nXQB9FHr": {
+			"type": "splunk.line",
+			"options": {
+				"y": "> primary | frameBySeriesNames('init')",
+				"legendDisplay": "bottom",
+				"dataValuesDisplay": "minmax"
+			},
+			"dataSources": {
+				"primary": "ds_KRnv7LSN"
+			},
+			"title": "No Requests with bck_s- init/ update"
+		},
+		"viz_8q2tjb6V": {
+			"type": "splunk.pie",
+			"dataSources": {
+				"primary": "ds_bEyx8GUV"
+			},
+			"title": "Top 10 Agents blocked in Protected URI",
+			"options": {
+				"showDonutHole": true,
+				"labelDisplay": "valuesAndPercentage"
+			}
+		},
+		"viz_zBQiqFK9": {
+			"type": "splunk.table",
+			"dataSources": {
+				"primary": "ds_Na9aCTmz"
+			},
+			"title": "Blocked Distinct Agents",
+			"description": "blocked requests for post challenge and protected uri",
+			"showProgressBar": false,
+			"showLastUpdated": false
+		},
+		"viz_4ZUhBiuX": {
+			"type": "splunk.line",
+			"options": {
+				"y": "> primary | frameBySeriesNames('aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1','aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1','aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01','aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1','aws:us-west-2:BZ-UW2-AOSUCP4-PD02','_span','_time')",
+				"y2": "> primary | frameBySeriesNames('')",
+				"legendDisplay": "bottom",
+				"dataValuesDisplay": "minmax"
+			},
+			"dataSources": {
+				"primary": "ds_InT6PBgQ"
+			},
+			"title": "Traffic based on VIP's",
+			"description": "Based on iaasLoc"
+		}
+	},
+	"dataSources": {
+		"ds_0jpg5sSG": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=*/shld/work/v0/q | stats count(eval(bctm < 5)) as bctm_s count(eval(bctm >= 5)) as bctm_f"
+			},
+			"name": "Bctm less than 5 seconds"
+		},
+		"ds_JStUeJjG": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aws_core srvNm=*shield-bot-test* sourcetype=shield_access_log  | table _time acTm, tTm",
+				"queryParameters": {
+					"earliest": "-2h@h",
+					"latest": "now"
+				}
+			},
+			"name": "Search_1"
+		},
+		"ds_cNP1oj53": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=\"*\"\n| timechart span=1m count by bck_a"
+			},
+			"name": "TPS Ajax calls"
+		},
+		"ds_ufDBtlDL": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aws_core aws_label=*AWS-UE1-DV4-AOS-POD01* sourcetype=shield_access_log uri=\"/shop/shld/work/v0/pat\" \n\n"
+			},
+			"name": "Search_5"
+		},
+		"ds_MfWsKI5o": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_bHWgJpf1",
+				"query": ""
+			},
+			"name": "Search_4"
+		},
+		"ds_izsGMHVx": {
+			"type": "ds.chain",
+			"options": {
+				"query": "| stats count(eval(stts=\"200\")) as 2XX ",
+				"extend": "ds_ufDBtlDL"
+			},
+			"name": "Search_6"
+		},
+		"ds_7pDeiWxs": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_ufDBtlDL",
+				"query": "| stats count(eval(uri=\"/shop.shld/v0/verify.js\")) as verifyJs"
+			},
+			"name": "Search_7"
+		},
+		"ds_bHWgJpf1": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=\"pass\"\n| stats count "
+			},
+			"name": "Ajax pass"
+		},
+		"ds_xMcstlJS": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=\"*\" | stats count"
+			},
+			"name": "Bot cookie status enabled"
+		},
+		"ds_rj9NTMvM": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log uri=\"/shop/shld/work/v0/q\" \n| eval rqTminmil = rqTm*1000 | table _time rqTminmil"
+			},
+			"name": "Request time"
+		},
+		"ds_YfuqdqZ4": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log uri=\"*/pat\"| timechart span=1h count"
+			},
+			"name": "Number of PAT calls every 30mins"
+		},
+		"ds_D1I6r2di": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*/shop/shld/work/v0/q\" \n|  stats count(eval(mthd=\"GET\")) as GET"
+			},
+			"name": "Challenge GET calls"
+		},
+		"ds_eB5bjxfe": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" \n| stats count"
+			},
+			"name": "Ajax Calls"
+		},
+		"ds_8sjmZ2kt": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=509\n| stats count "
+			},
+			"name": "Ajax fail"
+		},
+		"ds_l8vuF8sU": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" NOT bck_a=\"*\" | stats count"
+			},
+			"name": "bot cookie status disabled"
+		},
+		"ds_fIQv6UgV": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*/shld/work/v0/pat\" stts=200\n| stats count"
+			},
+			"name": "PAT success"
+		},
+		"ds_g3M4uTat": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=*/shld/work/v0/pat stts=401\n| stats count "
+			},
+			"name": "PAT failure 401"
+		},
+		"ds_7HT361Db": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*/shop/shld/work/v0/q\" \n|  stats count(eval(mthd=\"POST\")) as POST"
+			},
+			"name": "Challenge POST calls"
+		},
+		"ds_TTv3nNha": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\",\"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=509 | fillnull bck, bck_ch  value= \"-\" | stats count by bck, bck_ch, rSet, rlScrK"
+			},
+			"name": "Reasons for Blocked Protected URI"
+		},
+		"ds_MnEkdmvd": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=509 \n| fillnull bscr value=noShieldCookie\n| timechart span=1m count by bscr"
+			},
+			"name": "Bot score for blocked prot uri"
+		},
+		"ds_1uUZyMtX": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log uri=\"*?qbaaropc=1\""
+			},
+			"name": "Parent Protected URI"
+		},
+		"ds_aXR5iJU3": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=*/shld/work/v0/q\n|bucket span=1m _time\n|timechart span=1m avg(bctm) as median perc99(bctm) as P99"
+			},
+			"name": "BCTN - Median-P99"
+		},
+		"ds_IL2GWNCy": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=509 \n| timechart span=1m count by btMd"
+			},
+			"name": "BotMode"
+		},
+		"ds_s0BcYJBa": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*/shop/shld/work/v0/q\" \n|  stats count(eval(mthd=\"POST\")) as POST count(eval(stts=401)) as status"
+			},
+			"name": "POSTChallenges-Failure"
+		},
+		"ds_KSvHuycD": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=509\n| lookup geo_attr_countries iso2 as gCtry OUTPUT country \n| stats count by country \n| sort -count\n| head 10",
+				"queryParameters": {}
+			},
+			"name": "Top 10 countries with Blocked Protected URI"
+		},
+		"ds_DyctLhgz": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetyp=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") (uri=\"*/shld/work/v0/q\" AND stts!=200 AND mthd=POST)\n| stats count",
+				"queryParameters": {}
+			},
+			"name": "Reasons for Blocking Challenge POST call"
+		},
+		"ds_KRnv7LSN": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=*/shld/work/v0/q\n| timechart span=1m count by bck_s",
+				"queryParameters": {}
+			},
+			"name": "Number of bck_s init or update"
+		},
+		"ds_bEyx8GUV": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") uri=\"*?qbaaropc=1\" bck_a=509\n| stats count by agnt \n| sort -count\n| head 10"
+			},
+			"name": "Top 10 Agents that are blocked in protected uri"
+		},
+		"ds_Na9aCTmz": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\",\"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") (uri=*/shld/work/v0/q AND mthd=POST AND stts!=200)\n| dedup agnt\n| table agnt, dssid, bscr, btMd, gCtry, gCmp",
+				"queryParameters": {
+					"earliest": "$global_time.earliest$",
+					"latest": "$global_time.latest$"
+				}
+			},
+			"name": "Blocked Distinct Agents-Dssid"
+		},
+		"ds_InT6PBgQ": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=shield_aos_aws_core sourcetype=shield_access_log iaasLoc IN (\"aws:us-east-1:AWSPRD-D4BZUE1-AOS-PD1\",\"aws:us-west-2:BZ-UW2-AOSUCP4-PD02\",\"aws:us-west-2:AWSPRD-D4BZUW2-AOS-PD1\",\"aws:us-east-1:AWS-BZ-UE1-AOSUCP6-PD1\", \"aws:us-east-2:AWS-UE2-DV4-BZ-AOS-POD01\") | timechart span=1m count by iaasLoc limit=0",
+				"queryParameters": {
+					"earliest": "$global_time.earliest$",
+					"latest": "$global_time.latest$"
+				}
+			},
+			"name": "VIP Traffic"
+		}
+	},
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {
+						"latest": "$global_time.latest$",
+						"earliest": "$global_time.earliest$"
+					}
+				}
+			}
+		}
+	},
+	"inputs": {
+		"input_global_trp": {
+			"type": "input.timerange",
+			"options": {
+				"token": "global_time",
+				"defaultValue": "-24h@h,now"
+			},
+			"title": "Global Time Range"
+		}
+	},
+	"layout": {
+		"type": "grid",
+		"options": {
+			"width": 1440,
+			"height": 960
+		},
+		"structure": [
+			{
+				"item": "viz_foS3SZH9",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 0,
+					"w": 284,
+					"h": 122
+				}
+			},
+			{
+				"item": "viz_kjDAa43d",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 122,
+					"w": 284,
+					"h": 119
+				}
+			},
+			{
+				"item": "viz_5FmvuLsV",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 241,
+					"w": 596,
+					"h": 100
+				}
+			},
+			{
+				"item": "viz_kgHHGXdt",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 341,
+					"w": 1440,
+					"h": 268
+				}
+			},
+			{
+				"item": "viz_zBQiqFK9",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 609,
+					"w": 1440,
+					"h": 502
+				}
+			},
+			{
+				"item": "viz_imITctCZ",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 1111,
+					"w": 1440,
+					"h": 312
+				}
+			},
+			{
+				"item": "viz_FVnFShHp",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 1423,
+					"w": 1440,
+					"h": 320
+				}
+			},
+			{
+				"item": "viz_HcoHCW1R",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 1743,
+					"w": 1440,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_ipg8YD7r",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 2143,
+					"w": 1440,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_2eatCRtL",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 2543,
+					"w": 1440,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_h2XxATCH",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 2943,
+					"w": 1440,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_nXQB9FHr",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 3343,
+					"w": 1440,
+					"h": 400
+				}
+			},
+			{
+				"item": "viz_8q2tjb6V",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 3743,
+					"w": 1440,
+					"h": 359
+				}
+			},
+			{
+				"item": "viz_ndYfgk8d",
+				"type": "block",
+				"position": {
+					"x": 284,
+					"y": 0,
+					"w": 312,
+					"h": 122
+				}
+			},
+			{
+				"item": "viz_IhUtYFGw",
+				"type": "block",
+				"position": {
+					"x": 284,
+					"y": 122,
+					"w": 312,
+					"h": 119
+				}
+			},
+			{
+				"item": "viz_5zmnENB7",
+				"type": "block",
+				"position": {
+					"x": 596,
+					"y": 0,
+					"w": 305,
+					"h": 122
+				}
+			},
+			{
+				"item": "viz_BeKHyUJk",
+				"type": "block",
+				"position": {
+					"x": 596,
+					"y": 122,
+					"w": 305,
+					"h": 119
+				}
+			},
+			{
+				"item": "viz_Sunsj9mv",
+				"type": "block",
+				"position": {
+					"x": 596,
+					"y": 241,
+					"w": 844,
+					"h": 100
+				}
+			},
+			{
+				"item": "viz_OK5jL7Jc",
+				"type": "block",
+				"position": {
+					"x": 901,
+					"y": 0,
+					"w": 267,
+					"h": 122
+				}
+			},
+			{
+				"item": "viz_7JWH4NdM",
+				"type": "block",
+				"position": {
+					"x": 901,
+					"y": 122,
+					"w": 267,
+					"h": 119
+				}
+			},
+			{
+				"item": "viz_ak7Ggk8p",
+				"type": "block",
+				"position": {
+					"x": 1168,
+					"y": 0,
+					"w": 272,
+					"h": 122
+				}
+			},
+			{
+				"item": "viz_xJT7S8ps",
+				"type": "block",
+				"position": {
+					"x": 1168,
+					"y": 122,
+					"w": 272,
+					"h": 119
+				}
+			},
+			{
+				"item": "viz_4ZUhBiuX",
+				"type": "block",
+				"position": {
+					"x": 0,
+					"y": 4102,
+					"w": 1440,
+					"h": 400
+				}
+			}
+		],
+		"globalInputs": [
+			"input_global_trp"
+		]
+	},
+	"description": "",
+	"title": "Shield AOS Bot Statistics_Jasbir"
+}
