@@ -1,0 +1,20 @@
+Here are the technical descriptions for this specific set of Proofpoint and Sendmail MTA fields:
+| Proofpoint Field | Description |
+|---|---|
+| **auth** | The specific SMTP authentication mechanism used during the connection (e.g., PLAIN, LOGIN, CRAM-MD5). |
+| **auth_result** | The outcome of the SMTP authentication attempt by the sending server or user. |
+| **identity** | The authenticated identity (typically the username or email address) provided during the SMTP AUTH process. |
+| **mime** | The calculated or declared MIME type of the message body or specific attachment (e.g., application/pdf, text/html). |
+| **msgid** | The globally unique Internet Message-ID extracted from the email header. This is a critical pivot point for tracking a single email across multiple hops and systems. |
+| **nrcpts** | The total number of recipients (Number of ReCeipTs) specified in the envelope for this specific transaction. |
+| **oext** | The original file extension of an attachment before any modifications, sandbox detonations, or renaming by the filtering engine. |
+| **omime** | The original MIME type of an attachment or payload before Proofpoint unpacked, modified, or rewrote it. |
+| **proto** | The specific transmission protocol utilized for the connection (e.g., ESMTP, SMTP). |
+| **resolve** | The outcome of the forward DNS resolution check for the connecting server's hostname. |
+| **result** | A general outcome flag, typically contextualized by the specific module generating the log (e.g., the result of a spam scan or a routing check). |
+| **reverse** | The outcome of the reverse DNS (rDNS/PTR record) lookup for the connecting IP address. Crucial for identifying forged sending infrastructure. |
+| **status** | The specific delivery or processing status code (often mapping to standard Extended SMTP status codes like 2.0.0 for success or 5.x.x for permanent failures). |
+| **type** | A broad classification identifier used internally to categorize the message, attachment, or log event type. |
+| **uncompressed_size** | The true byte size of an attachment or payload *after* it has been extracted from an archive (like a ZIP or RAR) by the scanning engine. |
+| **verified** | A binary state or flag indicating whether a specific attribute (such as sender address or certificate) passed its validation check. |
+| **verify** | Similar to verified, often indicating the status or requirement of a specific verification process (e.g., TLS certificate verification). |
