@@ -1,0 +1,72 @@
+To extract the log signatures and structure the data for OCSF categorization, you will need a multi-stage parsing approach in Cribl Stream. Since your logs arrive encapsulated in a JSON wrapper ({"_raw": "..."}), the pipeline must first unwrap the payload, parse the standard syslog header, and then conditionally parse the message payload based on the event type.
+Here is the recommended sequence of Cribl functions and the resulting KV pairs you can expect.
+### 1. Base Extraction (Applies to all logs)
+**Step A: Unroll the JSON**
+ * **Function:** Parser
+ * **Operation:** Extract
+ * **Type:** JSON
+ * **Source Field:** _raw
+ * **Result:** This extracts the string payload into a new field (e.g., syslog_raw).
+**Step B: Parse Syslog Header**
+ * **Function:** Regex Extract
+ * **Source Field:** syslog_raw
+ * **Regex Pattern:** ^(?<timestamp>[A-Z][a-z]{2}\s+\d+\s+\d{2}:\d{2}:\d{2})\s+(?<hostname>\S+)\s+(?<daemon>[^\[:]+)(?:\[(?<pid>\d+)\])?:\s+(?<message_payload>.*)
+ * **Resulting Base KV Pairs:**
+   * timestamp: Apr 21 05:09:59
+   * hostname: 1cas010209g
+   * daemon: mgd, auditd, /usr/sbin/cron, or kernel
+   * pid: 81612, 17687 (will be null for kernel logs)
+   * message_payload: The remainder of the log string.
+### 2. Payload Extraction & Expected KV Pairs (Conditional)
+Once the message_payload is isolated, use a Drop or Route function to send the data through specific extraction rules based on the daemon or string matching within the payload.
+#### Category: Network Traffic & ACL Flows
+*Condition: daemon == 'kernel' AND message_payload contains %ACLLOG*
+Since this payload contains delimited key-value pairs (e.g., Src IP: 10.169.159.81, Src Port: 50748), you can use Cribl's built-in KV parser instead of writing complex regex.
+ * **Function:** Parser
+ * **Operation:** Extract
+ * **Type:** Key-Value
+ * **Source Field:** message_payload
+ * **Field Delimiter:** ,  (Comma followed by space)
+ * **Value Delimiter:** :  (Colon followed by space)
+ * **Expected KV Pairs:**
+   * Src IP: 10.169.159.81
+   * Src Port: 50748
+   * Dst IP: 47614 *(Note: The log snippet shows a port number where an IP is expected in the Dst IP field—you may need an Eval function to clean this formatting anomaly depending on the source system's output).*
+   * Src Intf: Ethernet1/1
+   * Protocol: "UDP"(17)
+   * ACL Name: VRW-ELM-IPV4-IN
+   * ACE Action: Permit
+   * Appl Intf: port-channel1.217
+   * Hit-count: 10
+#### Category: API & Script Execution (Management Plane)
+*Condition: message_payload contains UI_NETCONF_CMD OR UI_JUNOSCRIPT_CMD OR UI_CMDLINE_READ_LINE*
+ * **Function:** Regex Extract
+ * **Source Field:** message_payload
+ * **Regex Pattern:** User\s+'?(?<user>[^']+)'?\s+(?:used\s+(?<client_type>\S+)\s+client to run command|command)\s+'(?<command>[^']+)'
+ * **Expected KV Pairs:**
+   * user: root, (authentication in progress)
+   * client_type: NETCONF, JUNOScript, rpc
+   * command: get-virtual-chassis-port-information, show system storage
+#### Category: Identity & Access Management (IAM)
+*Condition: message_payload contains UI_LOGIN_EVENT OR UI_AUTH_EVENT*
+ * **Function:** Regex Extract
+ * **Source Field:** message_payload
+ * **Regex Pattern:** User '(?<user>[^']+)' (?:login, class '(?<class>[^']+)'|assigned to class '(?<class>[^']+)')
+ * **Expected KV Pairs:**
+   * user: root
+   * class: super-user
+   * fpc_interface: fpc0[70166] (using a secondary extraction if needed)
+   * connection_type: ssh-connection
+#### Category: System Process Activity
+*Condition: daemon == '/usr/sbin/cron' OR message_payload contains UI_CHILD_*
+ * **Function 1 (Cron):** Regex Extract
+   * **Pattern:** \((?<user>[^)]+)\) CMD \(\s*(?<command>.*?)\s*\)
+ * **Function 2 (Child Process Exit):** Regex Extract
+   * **Pattern:** Child exited: PID (?<child_pid>\d+), status (?<exit_status>\d+), command '(?<command>[^']+)'
+ * **Expected KV Pairs:**
+   * user: root
+   * command: /usr/libexec/atrun, /sbin/snapshot
+   * child_pid: 77110
+   * exit_status: 1, 0
+### Pipeline Cleanup
+After extracting the relevant data across these categories, insert a final Eval function to remove intermediate fields (like _raw, syslog_raw, and message_payload) using the Keep Fields or Remove Fields settings to minimize egress volume before delivering the normalized payload to your SIEM.
