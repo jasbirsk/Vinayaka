@@ -1,0 +1,57 @@
+let o = {};
+
+if (__e.vendor_user) o.vendor_user = __e.vendor_user;
+if (__e.vendor_responseStatus) o.vendor_responseStatus = __e.vendor_responseStatus;
+if (__e.vendor_objectRef) o.vendor_objectRef = __e.vendor_objectRef;
+if (__e.vendor_responseObject_status) o.vendor_responseObject_status = __e.vendor_responseObject_status;
+if (__e.vendor_requestObject_spec_resourceAttributes) o.vendor_requestObject_spec_resourceAttributes = __e.vendor_requestObject_spec_resourceAttributes;
+if (__e.vendor_requestObject_spec_nonResourceAttributes) o.vendor_requestObject_spec_nonResourceAttributes = __e.vendor_requestObject_spec_nonResourceAttributes;
+if (__e.vendor_responseObject_spec_securityContext) o.vendor_responseObject_spec_securityContext = __e.vendor_responseObject_spec_securityContext;
+if (__e.vendor_annotations) o.vendor_annotations = __e.vendor_annotations;
+
+if (__e.vendor_kubernetes) o.vendor_kubernetes = __e.vendor_kubernetes;
+if (__e.vendor_kubernetes_labels) o.vendor_kubernetes_labels = __e.vendor_kubernetes_labels;
+if (__e.vendor_kubernetes_annotations) o.vendor_kubernetes_annotations = __e.vendor_kubernetes_annotations;
+
+if (__e.vendor_responseObject_spec_containers_0) o.vendor_responseObject_spec_containers_0 = __e.vendor_responseObject_spec_containers_0;
+if (__e.vendor_responseObject_status_containerStatuses_0) o.vendor_responseObject_status_containerStatuses_0 = __e.vendor_responseObject_status_containerStatuses_0;
+if (__e.vendor_responseObject_metadata_ownerReferences_0) o.vendor_responseObject_metadata_ownerReferences_0 = __e.vendor_responseObject_metadata_ownerReferences_0;
+
+if (__e.event_time_observed) o.event_time_observed = __e.event_time_observed;
+if (__e.device_hostname) o.device_hostname = __e.device_hostname;
+if (__e.device_location) o.device_location = __e.device_location;
+if (__e.event_dataset) o.event_dataset = __e.event_dataset;
+if (__e.host_id) o.host_id = __e.host_id;
+if (__e.event_type) o.event_type = __e.event_type;
+if (__e.event_message) o.event_message = __e.event_message;
+
+if (__e.process_pid) o.process_pid = __e.process_pid;
+if (__e.process_parent_pid) o.process_parent_pid = __e.process_parent_pid;
+if (__e.process_name) o.process_name = __e.process_name;
+if (__e.process_command_line) o.process_command_line = __e.process_command_line;
+if (__e.process_executable) o.process_executable = __e.process_executable;
+if (__e.process_working_dir) o.process_working_dir = __e.process_working_dir;
+
+if (__e.src_ipv4) o.src_ipv4 = __e.src_ipv4;
+if (__e.src_hostname) o.src_hostname = __e.src_hostname;
+if (__e.src_port) o.src_port = __e.src_port;
+if (__e.dst_ipv4) o.dst_ipv4 = __e.dst_ipv4;
+if (__e.dst_port) o.dst_port = __e.dst_port;
+
+if (__e.http_url) o.http_url = __e.http_url;
+if (__e.http_user_agent) o.http_user_agent = __e.http_user_agent;
+
+if (__e.authentication_result) o.authentication_result = __e.authentication_result;
+if (__e.authentication_mechanism) o.authentication_mechanism = __e.authentication_mechanism;
+if (__e.authentication_factor) o.authentication_factor = __e.authentication_factor;
+
+if (__e.device_name) o.device_name = __e.device_name;
+
+if (__e.vendor_message) o.vendor_message = __e.vendor_message;
+if (__e.vendor_stream) o.vendor_stream = __e.vendor_stream;
+if (__e.vendor_time) o.vendor_time = __e.vendor_time;
+if (__e.vendor_msg) o.vendor_msg = __e.vendor_msg;
+if (__e.vendor_log) o.vendor_log = __e.vendor_log;
+if (__e.vendor_serviceName) o.vendor_serviceName = __e.vendor_serviceName;
+
+__e._raw = JSON.stringify(o);
