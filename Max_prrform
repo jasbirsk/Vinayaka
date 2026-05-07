@@ -1,49 +1,179 @@
-let o = {};
-let v; // Temporary variable to cache the lookup
+This stringify is working as expected to me and reduce the execution time by 9ms.
+JSON.stringify({
 
-if ((v = __e.vendor_user)) o.vendor_user = v;
-if ((v = __e.vendor_responseStatus)) o.vendor_responseStatus = v;
-if ((v = __e.vendor_objectRef)) o.vendor_objectRef = v;
-if ((v = __e.vendor_responseObject_status)) o.vendor_responseObject_status = v;
-if ((v = __e.vendor_requestObject_spec_resourceAttributes)) o.vendor_requestObject_spec_resourceAttributes = v;
-if ((v = __e.vendor_requestObject_spec_nonResourceAttributes)) o.vendor_requestObject_spec_nonResourceAttributes = v;
-if ((v = __e.vendor_responseObject_spec_securityContext)) o.vendor_responseObject_spec_securityContext = v;
-if ((v = __e.vendor_annotations)) o.vendor_annotations = v;
-if ((v = __e.vendor_kubernetes)) o.vendor_kubernetes = v;
-if ((v = __e.vendor_kubernetes_labels)) o.vendor_kubernetes_labels = v;
-if ((v = __e.vendor_kubernetes_annotations)) o.vendor_kubernetes_annotations = v;
-if ((v = __e.vendor_responseObject_spec_containers_0)) o.vendor_responseObject_spec_containers_0 = v;
-if ((v = __e.vendor_responseObject_status_containerStatuses_0)) o.vendor_responseObject_status_containerStatuses_0 = v;
-if ((v = __e.vendor_responseObject_metadata_ownerReferences_0)) o.vendor_responseObject_metadata_ownerReferences_0 = v;
-if ((v = __e.event_time_observed)) o.event_time_observed = v;
-if ((v = __e.device_hostname)) o.device_hostname = v;
-if ((v = __e.device_location)) o.device_location = v;
-if ((v = __e.event_dataset)) o.event_dataset = v;
-if ((v = __e.host_id)) o.host_id = v;
-if ((v = __e.event_type)) o.event_type = v;
-if ((v = __e.event_message)) o.event_message = v;
-if ((v = __e.process_pid)) o.process_pid = v;
-if ((v = __e.process_parent_pid)) o.process_parent_pid = v;
-if ((v = __e.process_name)) o.process_name = v;
-if ((v = __e.process_command_line)) o.process_command_line = v;
-if ((v = __e.process_executable)) o.process_executable = v;
-if ((v = __e.process_working_dir)) o.process_working_dir = v;
-if ((v = __e.src_ipv4)) o.src_ipv4 = v;
-if ((v = __e.src_hostname)) o.src_hostname = v;
-if ((v = __e.src_port)) o.src_port = v;
-if ((v = __e.dst_ipv4)) o.dst_ipv4 = v;
-if ((v = __e.dst_port)) o.dst_port = v;
-if ((v = __e.http_url)) o.http_url = v;
-if ((v = __e.http_user_agent)) o.http_user_agent = v;
-if ((v = __e.authentication_result)) o.authentication_result = v;
-if ((v = __e.authentication_mechanism)) o.authentication_mechanism = v;
-if ((v = __e.authentication_factor)) o.authentication_factor = v;
-if ((v = __e.device_name)) o.device_name = v;
-if ((v = __e.vendor_message)) o.vendor_message = v;
-if ((v = __e.vendor_stream)) o.vendor_stream = v;
-if ((v = __e.vendor_time)) o.vendor_time = v;
-if ((v = __e.vendor_msg)) o.vendor_msg = v;
-if ((v = __e.vendor_log)) o.vendor_log = v;
-if ((v = __e.vendor_serviceName)) o.vendor_serviceName = v;
+  vendor_user: vendor_user,
 
-__e._raw = JSON.stringify(o);
+  vendor_responseStatus: vendor_responseStatus,
+
+  vendor_objectRef: vendor_objectRef,
+
+  vendor_responseObject_status: vendor_responseObject_status,
+
+  vendor_requestObject_spec_resourceAttributes: vendor_requestObject_spec_resourceAttributes,
+
+  vendor_requestObject_spec_nonResourceAttributes: vendor_requestObject_spec_nonResourceAttributes,
+
+  vendor_responseObject_spec_securityContext: vendor_responseObject_spec_securityContext,
+
+  vendor_annotations: vendor_annotations,
+ 
+  vendor_kubernetes: vendor_kubernetes,
+
+  vendor_kubernetes_labels: vendor_kubernetes_labels,
+
+  vendor_kubernetes_annotations: vendor_kubernetes_annotations,
+ 
+  vendor_responseObject_spec_containers_0: vendor_responseObject_spec_containers_0,
+
+  vendor_responseObject_status_containerStatuses_0: vendor_responseObject_status_containerStatuses_0,
+
+  vendor_responseObject_metadata_ownerReferences_0: vendor_responseObject_metadata_ownerReferences_0,
+ 
+  event_time_observed: event_time_observed,
+
+  device_hostname: device_hostname,
+
+  device_location: device_location,
+
+  event_dataset: event_dataset,
+
+  host_id: host_id,
+
+  event_type: event_type,
+
+  event_message: event_message,
+ 
+  process_pid: process_pid,
+
+  process_parent_pid: process_parent_pid,
+
+  process_name: process_name,
+
+  process_command_line: process_command_line,
+
+  process_executable: process_executable,
+
+  process_working_dir: process_working_dir,
+ 
+  vendor_uid: vendor_uid,
+
+  vendor_auid: vendor_auid,
+
+  vendor_euid: vendor_euid,
+
+  vendor_ses: vendor_ses,
+
+  vendor_subj: vendor_subj,
+
+  vendor_acct: vendor_acct,
+ 
+  src_ipv4: src_ipv4,
+
+  src_hostname: src_hostname,
+
+  src_port: src_port,
+
+  dst_ipv4: dst_ipv4,
+
+  dst_port: dst_port,
+ 
+  authentication_result: authentication_result,
+
+  authentication_mechanism: authentication_mechanism,
+
+  authentication_factor: authentication_factor,
+ 
+  vendor_success: vendor_success,
+
+  vendor_exit: vendor_exit,
+
+  vendor_syscall: vendor_syscall,
+
+  vendor_cipher: vendor_cipher,
+ 
+  vendor_a0: vendor_a0,
+
+  vendor_a1: vendor_a1,
+
+  vendor_a2: vendor_a2,
+
+  vendor_a3: vendor_a3,
+ 
+  network_direction: network_direction,
+
+  host_architecture: host_architecture,
+ 
+  vendor_start: vendor_start,
+
+  vendor_grantors: vendor_grantors,
+
+  vendor_PAM_setcred: vendor_PAM_setcred,
+
+  vendor_PAM_session_close: vendor_PAM_session_close,
+
+  vendor_PAM_authentication: vendor_PAM_authentication,
+ 
+  vendor_table: vendor_table,
+
+  vendor_old_auid: vendor_old_auid,
+
+  vendor_pubkey_auth: vendor_pubkey_auth,
+
+  vendor_inode: vendor_inode,
+
+  vendor_nametype: vendor_nametype,
+ 
+  file_permissions: file_permissions,
+
+  file_owner: file_owner,
+
+  file_name: file_name,
+ 
+  vendor_cmd: vendor_cmd,
+ 
+  http_url: http_url,
+
+  http_user_agent: http_user_agent,
+ 
+  event_action: event_action,
+
+  event_correlation_id: event_correlation_id,
+ 
+  vendor_sourceIPs: vendor_sourceIPs,
+
+  vendor_requestReceivedTimestamp: vendor_requestReceivedTimestamp,
+
+  vendor_stageTimestamp: vendor_stageTimestamp,
+ 
+  vendor_stage: vendor_stage,
+
+  vendor_level: vendor_level,
+
+  vendor_severity: vendor_severity,
+ 
+  vendor_new: vendor_new,
+
+  vendor_old: vendor_old,
+ 
+  device_name: device_name,
+ 
+  vendor_message: vendor_message,
+
+  vendor_stream: vendor_stream,
+
+  vendor_time: vendor_time,
+
+  vendor_msg: vendor_msg,
+
+  vendor_log: vendor_log,
+
+  vendor_serviceName: vendor_serviceName,
+ 
+  vendor_responseObject_spec_serviceAccountName: vendor_responseObject_spec_serviceAccountName,
+
+  vendor_requestObject_spec_user: vendor_requestObject_spec_user,
+
+  vendor_responseObject_metadata_name: vendor_responseObject_metadata_name
+
+})
+ 
