@@ -1,5 +1,3 @@
-
-
 <style>
 .stage-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px 16px; margin-bottom: 10px; }
 .stage-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
