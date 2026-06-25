@@ -1,0 +1,289 @@
+
+
+<style>
+.stage-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px 16px; margin-bottom: 10px; }
+.stage-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.stage-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+.badge-high { background: #EAF3DE; color: #3B6D11; }
+.badge-med { background: #FAEEDA; color: #633806; }
+.badge-low { background: #FAECE7; color: #712B13; }
+.badge-human { background: #EEEDFE; color: #3C3489; }
+.tools-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tool-pill { font-size: 11px; padding: 2px 8px; border-radius: 20px; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); background: var(--color-background-secondary); }
+.progress-bar { height: 4px; border-radius: 2px; margin-top: 10px; background: var(--color-background-secondary); }
+.progress-fill { height: 100%; border-radius: 2px; }
+.section-label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin: 20px 0 10px; }
+.legend-row { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.agent-box { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; }
+.agent-icon { font-size: 18px; margin-top: 1px; }
+.agent-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.agent-desc { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+.tab-row { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.tab { font-size: 13px; padding: 6px 14px; cursor: pointer; border: none; background: none; color: var(--color-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -0.5px; }
+.tab.active { color: var(--color-text-primary); font-weight: 500; border-bottom: 2px solid var(--color-text-primary); }
+.pane { display: none; }
+.pane.active { display: block; }
+</style>
+
+<h2 class="sr-only">SIEM Data Pipeline Automation Framework — Stage-by-stage breakdown of what can be automated with AI agents vs. what requires human judgment</h2>
+
+<div class="tab-row">
+  <button class="tab active" onclick="showTab('pipeline')">Pipeline stages</button>
+  <button class="tab" onclick="showTab('agents')">Agent design</button>
+  <button class="tab" onclick="showTab('roi')">Effort reduction</button>
+</div>
+
+<div id="pane-pipeline" class="pane active">
+  <div class="legend-row">
+    <div class="legend-item"><div class="legend-dot" style="background:#639922"></div> High automation (80–95%)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#BA7517"></div> Partial (50–70%)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#993C1D"></div> Low (20–40%)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#534AB7"></div> Human review required</div>
+  </div>
+
+  <div class="section-label">Stage 1 — Cribl ingest &amp; profiling</div>
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Raw data profiling in <code>_raw</code> field</span>
+      <span class="badge badge-high">90% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">Claude agent reads _raw samples from Cribl preprocessor, detects format (JSON/KV/CEF/syslog/XML), identifies nested structures, and generates a field inventory with types and cardinality stats. No human needed for detection — only for exception handling.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Claude API</span><span class="tool-pill">Cribl REST API</span><span class="tool-pill">Python agent</span><span class="tool-pill">few-shot prompting</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:90%;background:#639922"></div></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Azure Blob → Snowflake bronze ingest</span>
+      <span class="badge badge-high">95% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">Fully pipeline-driven. Schema-on-read via Snowflake VARIANT column. Agent triggers COPY INTO commands, monitors for load errors, and alerts on schema drift. Purely orchestration work.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Snowflake Tasks</span><span class="tool-pill">ADF / EventGrid</span><span class="tool-pill">Snowflake Python UDF</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:95%;background:#639922"></div></div>
+  </div>
+
+  <div class="section-label">Stage 2 — Bronze table analysis &amp; OCSF mapping</div>
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Field extraction hypothesis (Cortex-style prompting)</span>
+      <span class="badge badge-med">70% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">Claude agent receives flattened bronze table samples, vendor documentation (PDF/URL), and OCSF schema. It outputs: security-relevant fields, drop candidates with justification, and candidate OCSF mappings. The hypothesis is 70–80% accurate — a human DE reviews the mapping list, not generates it.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Claude API + RAG</span><span class="tool-pill">OCSF schema embed</span><span class="tool-pill">vendor docs RAG</span><span class="tool-pill">Snowflake SQL</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:70%;background:#BA7517"></div></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Vendor doc cross-reference &amp; field shortlisting</span>
+      <span class="badge badge-med">65% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">RAG pipeline over vendor PDFs/URLs auto-resolves field names to vendor definitions. The agent produces a shortlist with confidence scores. A human approves the final list — not researches it from scratch. Reduces DE research time by ~70%.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Claude API</span><span class="tool-pill">PDF/URL chunking</span><span class="tool-pill">vector store (pgvector/Pinecone)</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:65%;background:#BA7517"></div></div>
+  </div>
+
+  <div class="section-label">Stage 3 — Cribl validation pipeline generation</div>
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Cribl pipeline config generation (flatten + serialize)</span>
+      <span class="badge badge-med">60% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">Given the approved field list, an agent generates Cribl pipeline JSON: Eval functions to flatten nested keys, drop functions for excluded fields, and a final Serialize to pack back into _raw. Cribl REST API is used to push the draft pipeline. A DE reviews and tests before activation.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Cribl REST API</span><span class="tool-pill">Claude code-gen</span><span class="tool-pill">pipeline JSON templating</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:60%;background:#BA7517"></div></div>
+  </div>
+
+  <div class="section-label">Stage 4 — Silver validation &amp; SQL generation</div>
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Snowflake SQL + stored procedure generation</span>
+      <span class="badge badge-high">85% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">Agent generates flattening SQL, LATERAL FLATTEN queries, and stored procedures for the silver table given the approved field mapping. Also generates data quality assertions. SQL is deterministic once the field list is known.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Claude code-gen</span><span class="tool-pill">Snowflake Python connector</span><span class="tool-pill">dbt optional</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:85%;background:#639922"></div></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Validation QA — field completeness check</span>
+      <span class="badge badge-med">75% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">Agent runs the generated SQL against silver tables, compares parsed field counts vs. expected field list, flags nulls/type mismatches. Produces a QA report. Human reviews only the flagged anomalies — not every field.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Snowflake connector</span><span class="tool-pill">Great Expectations / dbt tests</span><span class="tool-pill">Claude report-gen</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:75%;background:#BA7517"></div></div>
+  </div>
+
+  <div class="section-label">Stage 5 — Production promotion</div>
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">Clone validation pipeline → production</span>
+      <span class="badge badge-high">90% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">Cribl REST API supports pipeline cloning. Agent clones validated pipeline, updates destination references (prod blob container), and triggers smoke tests against prod blob before final activation. Gated by human sign-off webhook.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Cribl REST API</span><span class="tool-pill">Azure Event Grid</span><span class="tool-pill">approval gate</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:90%;background:#639922"></div></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-header">
+      <span class="stage-title">New source onboarding — deeply nested / undocumented formats</span>
+      <span class="badge badge-low">25% automatable</span>
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary)">When vendor documentation is absent or contradicts observed data, the agent can flag ambiguity but cannot reliably resolve it. Security context (e.g. is this field a threat indicator or a benign counter?) requires human judgment. This is the irreducible core of DE work.</div>
+    <div class="tools-row">
+      <span class="tool-pill">Human-in-the-loop</span><span class="tool-pill">agent assists only</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:25%;background:#993C1D"></div></div>
+  </div>
+</div>
+
+<div id="pane-agents" class="pane">
+  <div class="section-label">Proposed agent architecture</div>
+
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-scan" style="color:var(--color-text-info)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">Profiler Agent</div>
+      <div class="agent-desc">Connects to Cribl REST API, samples _raw events from preprocessing pipeline (50–200 events), detects format, identifies top-level and nested keys, computes cardinality and null rates. Outputs structured JSON field inventory to a metadata store in Snowflake.</div>
+    </div>
+  </div>
+
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-book-2" style="color:var(--color-text-warning)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">RAG / Vendor Doc Agent</div>
+      <div class="agent-desc">Ingests vendor PDFs, admin guides, and syslog documentation into a vector store. Given a field inventory, retrieves relevant documentation chunks, confirms or rejects field definitions, and flags undocumented fields. Built on Claude API with tool_use for retrieval calls.</div>
+    </div>
+  </div>
+
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-git-branch" style="color:var(--color-text-success)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">OCSF Mapper Agent</div>
+      <div class="agent-desc">Holds the full OCSF 1.x schema as a structured knowledge base. Takes the field inventory + vendor doc context, produces candidate mappings with confidence scores, assigns vendor_ prefix for unmappable fields, and outputs a human-reviewable mapping spreadsheet (Excel/CSV).</div>
+    </div>
+  </div>
+
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-code" style="color:var(--color-text-info)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">Pipeline Code-Gen Agent</div>
+      <div class="agent-desc">Consumes the approved field mapping and generates: (1) Cribl Eval/Serialize pipeline JSON, (2) Snowflake LATERAL FLATTEN SQL, (3) dbt model files or stored procedures, (4) dbt/Great Expectations test assertions. Pushes draft pipeline to Cribl via REST API and SQL to a staging schema in Snowflake.</div>
+    </div>
+  </div>
+
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-checklist" style="color:var(--color-text-success)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">QA / Validation Agent</div>
+      <div class="agent-desc">Runs field completeness SQL against silver tables, computes pass/fail per expected field, identifies type mismatches and null rate anomalies. Produces a structured QA report. Flags items for human review. On pass, triggers the promotion workflow via a gated Cribl API call.</div>
+    </div>
+  </div>
+
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-user-check" style="color:var(--color-text-secondary)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">Human-in-the-Loop Gate</div>
+      <div class="agent-desc">Not an agent — a Slack/Teams webhook or web UI where a senior DE receives the OCSF mapping for review, approves or edits, and sends the approval token back to the orchestrator. This is the single human checkpoint that gates progression from mapping → code-gen → prod promotion.</div>
+    </div>
+  </div>
+</div>
+
+<div id="pane-roi" class="pane">
+  <div class="section-label">Estimated effort reduction by activity</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+    <div class="stage-card" style="margin:0">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">Raw profiling time</div>
+      <div style="font-size:22px;font-weight:500;color:var(--color-text-primary)">−80%</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">8 hrs → ~1.5 hrs per source</div>
+    </div>
+    <div class="stage-card" style="margin:0">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">OCSF mapping time</div>
+      <div style="font-size:22px;font-weight:500;color:var(--color-text-primary)">−65%</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">12 hrs → ~4 hrs per source</div>
+    </div>
+    <div class="stage-card" style="margin:0">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">Cribl pipeline authoring</div>
+      <div style="font-size:22px;font-weight:500;color:var(--color-text-primary)">−70%</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">6 hrs → ~1.5 hrs per source</div>
+    </div>
+    <div class="stage-card" style="margin:0">
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">SQL / stored proc authoring</div>
+      <div style="font-size:22px;font-weight:500;color:var(--color-text-primary)">−85%</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">8 hrs → ~1.2 hrs per source</div>
+    </div>
+  </div>
+
+  <div class="section-label">Headcount model (200 sources)</div>
+  <div class="stage-card">
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:10px">Rough estimate — assumes 200 sources, mix of complexity</div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:12px;color:var(--color-text-secondary)">Without automation</div>
+        <div style="font-size:20px;font-weight:500">8–12 DEs</div>
+        <div style="font-size:11px;color:var(--color-text-secondary)">~34 hrs / source × 200</div>
+      </div>
+      <div style="color:var(--color-border-secondary);font-size:24px;align-self:center">→</div>
+      <div>
+        <div style="font-size:12px;color:var(--color-text-success)">With automation</div>
+        <div style="font-size:20px;font-weight:500;color:var(--color-text-success)">3–4 DEs</div>
+        <div style="font-size:11px;color:var(--color-text-secondary)">~10 hrs review / source</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:12px;color:var(--color-text-secondary);border-top:0.5px solid var(--color-border-tertiary);padding-top:10px">Remaining DEs focus on: edge-case resolution, security context validation, agent tuning, and ongoing source drift monitoring. The automation handles the mechanical throughput.</div>
+  </div>
+
+  <div class="section-label">What cannot be automated</div>
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-alert-triangle" style="color:var(--color-text-warning)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">Security context judgment</div>
+      <div class="agent-desc">Deciding whether a field like "action=permit" is security-relevant in a given threat model requires human security domain expertise. Agents can flag it; they cannot reliably decide.</div>
+    </div>
+  </div>
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-alert-triangle" style="color:var(--color-text-warning)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">Ambiguous / undocumented vendor formats</div>
+      <div class="agent-desc">When vendor docs contradict observed data (common with Cisco legacy syslog variants, proprietary CheckPoint formats), the agent cannot resolve the conflict reliably.</div>
+    </div>
+  </div>
+  <div class="agent-box">
+    <div class="agent-icon"><i class="ti ti-alert-triangle" style="color:var(--color-text-warning)" aria-hidden="true"></i></div>
+    <div>
+      <div class="agent-name">Production sign-off accountability</div>
+      <div class="agent-desc">A human must own the decision to push a pipeline to production. Regulatory and operational risk cannot be delegated to an automated agent.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('pane-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
